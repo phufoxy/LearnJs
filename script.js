@@ -1,4 +1,42 @@
-loadData();
+LoadDataToHTML();
+function LoadDataToHTML() {
+    listArray = [
+        {
+            "fullName": "Tran van Phu",
+            "empCode": "123abc",
+            "salary": 125,
+            "city": "Da Nang"
+        },
+        {
+            "fullName": "Anh Tuyet",
+            "empCode": "123abc",
+            "salary": 125,
+            "city": "Da Nang"
+        },
+        {
+            "fullName": "Panala",
+            "empCode": "123abc",
+            "salary": 125,
+            "city": "Da Nang"
+        },
+
+    ];
+
+    for (var i = 0; i < listArray.length; i++) {
+        var table = document.getElementById("employeeList");
+        newRow = table.insertRow(table.length);
+        cell1 = newRow.insertCell(0);
+        cell2 = newRow.insertCell(1);
+        cell3 = newRow.insertCell(2);
+        cell4 = newRow.insertCell(3);
+        cell5 = newRow.insertCell(4);
+        cell1.innerHTML = listArray[i].fullName;
+        cell2.innerHTML = listArray[i].empCode;
+        cell3.innerHTML = listArray[i].salary;
+        cell4.innerHTML = listArray[i].city;
+        cell5.innerHTML = '<a class="btn btn-danger" onClick= "onEdit(this)">Edit</a><a onClick= "onDelete(this)" class="btn btn-success">Delete</a>';
+    }
+}
 var selectedRow = null;
 function onFormSubmit() {
     if (validate()) {
@@ -22,46 +60,9 @@ function readFormData() {
     return formData;
 }
 
-function loadData() {
-    listArray = [
-        {
-            "fullName": "Tran van Phu",
-            "empCode": "123abc",
-            "salary": 125,
-            "city": "Da Nang"
-        },
-        {
-            "fullName": "Anh Tuyet",
-            "empCode": "123abc",
-            "salary": 125,
-            "city": "Da Nang"
-        },
-        {
-            "fullName": "Panala",
-            "empCode": "123abc",
-            "salary": 125,
-            "city": "Da Nang"
-        },
 
-    ];
-    for (i = 0; i < listArray.length; i++) {
-        var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.length);
-        cell1 = newRow.insertCell(0);
-        cell1.innerHTML = listArray[i].fullName;
-        cell2 = newRow.insertCell(1);
-        cell2.innerHTML = listArray[i].empCode;
-        cell3 = newRow.insertCell(2);
-        cell3.innerHTML = listArray[i].salary;
-        cell4 = newRow.insertCell(3);
-        cell4.innerHTML = listArray[i].city;
-        cell4 = newRow.insertCell(4);
-        cell4.innerHTML = '<a class="btn btn-danger" onClick= "onEdit(this)">Edit</a><a onClick= "onDelete(this)" class="btn btn-success">Delete</a>';
-    }
-
-}
 function insertNewRecord(data) {
-    var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
+    var table = document.getElementById("employeeList");
     var newRow = table.insertRow(table.length);
     cell1 = newRow.insertCell(0);
     cell1.innerHTML = data.fullName;
@@ -102,7 +103,7 @@ function onDelete(td) {
     }
 }
 function validate() {
-    isValid = true;
+    var isValid = true;
     if (document.getElementById("fullName").value == "") {
         isValid = false;
         document.getElementById("fullNameValidationError").classList.remove("hide");
